@@ -1,6 +1,7 @@
 <?php
 
 // print_r($_SERVER);
+date_default_timezone_set("Asia/Bangkok");
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
 ini_set("session.gc_maxlifetime", 1800);
@@ -22,6 +23,7 @@ $app->addRequestHandler('multipart/form-data', new FormDataRequest);
 $app->addRequestHandler('application/x-www-form-urlencoded', new FormUrlEncodedRequest);
 
 $app->post('/register', function($request) use($app) {
+
 	if (!$request->body->user_name || !$request->body->user_pass) {
 		return array('success'=>false, 'reason'=>'Masukkan data yang lengkap.');
 	}
@@ -73,106 +75,50 @@ $app->post('/usermanagement', function($request) use($app) {
 	return $retData;
 });
 
-$app->post('/barang', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_barang');
-	$retData = $model->getData($request->body);
+$app->post('/ubahkelas',function($request) use($app){
 
-	return array('success'=>true, 'DataRow'=>$retData->DataRow);
-});
+	$model = $app->load->model('tbl_kelas');
 
-$app->post('/barangmanagement', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_barang');
-	$retData = $model->putData($request->body);
-
-	return $retData;
-});
-
-$app->post('/barangmasuk', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_barang_masuk');
-	$retData = $model->putData($request->body);
-
-	return $retData;
-});
-
-$app->post('/barangkeluar', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_barang_keluar');
-	$retData = $model->putData($request->body);
-
-	return $retData;
-});
-
-$app->post('/laporan', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('trx_laporan');
-	$retData = $model->getData($request->body);
-
-	return $retData;
+	return $model->putData($request->body);
 });
 
 
-$app->post('/supplier', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_supplier');
-	$retData = $model->getData($request->body);
+$app->post('/kelas',function($request) use($app){
 
-	return $retData;
+	$model = $app->load->model('tbl_kelas');
+
+	return $model->getData($request->body);
 });
 
-$app->post('/editsupplier', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_supplier');
-	$retData = $model->putData($request->body);
+$app->post('/ubahsiswa',function($request) use($app){
 
-	return $retData;
+	$model = $app->load->model('tbl_siswa');
+
+	return $model->putData($request->body);
 });
 
 
-$app->post('/mandor', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_mandor');
-	$retData = $model->getData($request->body);
+$app->post('/siswa',function($request) use($app){
 
-	return $retData;
+	$model = $app->load->model('tbl_siswa');
+
+	return $model->getData($request->body);
 });
 
-$app->post('/editmandor', function($request) use($app) {
-	// session_start();
-	// if (!$_SESSION['user_name'] || !$_SESSION['user_pass']) {
-	// 	return array('success'=>false, 'reason'=>'Maaf, anda harus login dahulu.');
-	// }
-	$model = $app->load->model('tbl_mandor');
-	$retData = $model->putData($request->body);
+$app->post('/check',function($request) use($app){
 
-	return $retData;
+	$model = $app->load->model('tbl_absen');
+
+	return $model->putData($request->body);
 });
+
+$app->post('/checksiswa',function($request) use($app){
+
+	$model = $app->load->model('tbl_absen');
+
+	return $model->getData($request->body);
+});
+
 
 
 $app->run();

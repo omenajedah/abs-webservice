@@ -7,7 +7,4 @@ class tbl_user extends model {
 		$this->SQLFile = "tbl_user.sql";	
 	}
 
-
-
-
 }
