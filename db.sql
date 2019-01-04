@@ -1,6 +1,6 @@
 /*
 SQLyog Professional v12.5.1 (64 bit)
-MySQL - 10.1.35-MariaDB : Database - absensi
+MySQL - 10.1.21-MariaDB : Database - absensi
 *********************************************************************
 */
 
@@ -24,10 +24,11 @@ CREATE TABLE `tbl_absen` (
   `id_absen` int(11) NOT NULL AUTO_INCREMENT,
   `nisn` char(12) NOT NULL,
   `id_kelas` int(11) NOT NULL,
+  `tipe_absen` tinyint(1) DEFAULT NULL COMMENT '1 hadir, 2 izin, 3 sakit, 4 alpha',
   `tanggal_absen` date NOT NULL,
   `waktu_absen` time NOT NULL,
   PRIMARY KEY (`id_absen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_absen` */
 
@@ -39,9 +40,14 @@ CREATE TABLE `tbl_kelas` (
   `id_kelas` int(11) NOT NULL AUTO_INCREMENT,
   `nama_kelas` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id_kelas`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_kelas` */
+
+insert  into `tbl_kelas`(`id_kelas`,`nama_kelas`) values 
+(1,'Kelas 1'),
+(2,'Kelas 2'),
+(14,'Kelas 6');
 
 /*Table structure for table `tbl_siswa` */
 
@@ -56,6 +62,16 @@ CREATE TABLE `tbl_siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_siswa` */
+
+insert  into `tbl_siswa`(`nisn`,`nama_siswa`,`jenis_kelamin`,`id_kelas`) values 
+('000001','aldo',1,1),
+('000002','amanto',1,1),
+('000003','aninda',0,3),
+('000004','baskara',1,3),
+('000005','lala',0,1),
+('000006','anto',1,14),
+('000009','dodi',0,14),
+('1673','susi',0,1);
 
 /*Table structure for table `tbl_user` */
 
@@ -73,7 +89,9 @@ CREATE TABLE `tbl_user` (
 /*Data for the table `tbl_user` */
 
 insert  into `tbl_user`(`user_name`,`user_pass`,`user_fullname`,`user_type`,`user_status`) values 
-('admin','admin','Administrator',1,1);
+('admin','admin','Administrator',1,1),
+('jshdjic','bsjfjh','bsjchx',1,1),
+('tessa','1234','tessssssa',1,1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
