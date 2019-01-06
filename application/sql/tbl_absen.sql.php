@@ -8,9 +8,9 @@ if ($Fields) {
 	$DefaultFields = $Fields;
 }
 
-if (!$all)
-	$Where.=" AND c.`tipe_absen` IS NULL ";
-
+// if (!$all)
+// 	$Where.=" AND c.`tipe_absen` IS NULL ";
+$Where.=" AND a.id_kelas = '$id_kelas' ";
 
 
 if ($OrderBy) {
